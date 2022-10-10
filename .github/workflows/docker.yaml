@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Send data to OTLP backend
-        uses: dpacheconr/gha-metric-exporter@v1
+        uses: dpacheconr/gha-metric-exporter
         with:
           endpoint: "https://otlp.nr-data.net:443"
           headers: "api-key=${{ secrets.ACCESS_TOKEN }}"
