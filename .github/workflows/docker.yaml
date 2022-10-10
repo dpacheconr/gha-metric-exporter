@@ -40,7 +40,13 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          
+
+  otel-export-trace:
+    if: always()
+    name: OpenTelemetry Export Trace
+    runs-on: ubuntu-latest
+    needs: [build] # must run when all jobs are complete
+    steps:
       - name: Export Workflow Trace
         uses: inception-health/otel-export-trace-action@latest
         with:
@@ -48,4 +54,5 @@ jobs:
           otlpHeaders: "api-key=${{ secrets.ACCESS_TOKEN }}"
           githubToken: ${{ secrets.DP_GITHUB_TOKEN }}
           runId: ${{ github.event.workflow_run.id }}
+
 
