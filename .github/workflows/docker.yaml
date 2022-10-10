@@ -10,6 +10,10 @@ on:
 
 jobs:
   build:
+    name: Docker images build
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Export Workflow Trace
         uses: inception-health/otel-export-trace-action@latest
         with:
@@ -18,10 +22,6 @@ jobs:
           githubToken: ${{ secrets.DP_GITHUB_TOKEN }}
           runId: ${{ github.event.workflow_run.id }}
 
-    name: Docker images build
-    runs-on: ubuntu-latest
-
-    steps:
       - name: Checkout 
         uses: actions/checkout@v2
 
@@ -48,5 +48,5 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-    
+
 
