@@ -14,12 +14,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Send data to OTLP backend
-        uses: docker.io/dpacheconr/gha-metric-exporter:v1 
-        with:
-          endpoint: "https://otlp.nr-data.net:443"
-          headers: "api-key=${{ secrets.ACCESS_TOKEN }}"
-
       - name: Checkout 
         uses: actions/checkout@v2
 
@@ -46,5 +40,10 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          
+
+      - name: Send data to OTLP backend
+        uses: docker.io/dpacheconr/gha-metric-exporter:v1 
+        with:
+          endpoint: "https://otlp.nr-data.net:443"
+          headers: "api-key=${{ secrets.ACCESS_TOKEN }}"          
 
