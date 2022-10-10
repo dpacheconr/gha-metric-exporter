@@ -42,7 +42,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
 
       - name: Send data to OTLP backend
-        uses: dpacheconr/gha-otlp-exporter@v4
+        uses: dpacheconr/gha-otlp-exporter@v6
         with:
           endpoint: "https://otlp.nr-data.net:4317"
           headers: "api-key=${{ secrets.ACCESS_TOKEN }}"          
