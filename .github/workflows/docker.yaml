@@ -53,6 +53,6 @@ jobs:
           otlpEndpoint: https://otlp.nr-data.net:443/v1/traces
           otlpHeaders: "api-key=${{ secrets.ACCESS_TOKEN }}"
           githubToken: ${{ secrets.DP_GITHUB_TOKEN }}
-          runId: ${{ github.event.workflow_run.id }}
+
 
 
