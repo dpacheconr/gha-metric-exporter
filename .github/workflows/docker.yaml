@@ -43,7 +43,6 @@ jobs:
 
       - name: Send data to OTLP backend
         uses: dpacheconr/github-action-to-otlp@v1
-        id: 
         with:
           endpoint: "https://otlp.nr-data.net:443"
           headers: "api-key=${{ secrets.ACCESS_TOKEN }}"          
