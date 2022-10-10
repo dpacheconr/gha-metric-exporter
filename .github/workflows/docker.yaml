@@ -10,6 +10,14 @@ on:
 
 jobs:
   build:
+      - name: Export Workflow Trace
+        uses: inception-health/otel-export-trace-action@latest
+        with:
+          otlpEndpoint: https://otlp.nr-data.net:443/v1/traces
+          otlpHeaders: "api-key=${{ secrets.ACCESS_TOKEN }}"
+          githubToken: ${{ secrets.DP_GITHUB_TOKEN }}
+          runId: ${{ github.event.workflow_run.id }}
+
     name: Docker images build
     runs-on: ubuntu-latest
 
@@ -40,10 +48,5 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-
-      - name: Send data to OTLP backend
-        uses: dpacheconr/gha-otlp-exporter@v6
-        with:
-          endpoint: "https://otlp.nr-data.net:443/v1/traces"
-          headers: "api-key=${{ secrets.ACCESS_TOKEN }}"          
+    
 
